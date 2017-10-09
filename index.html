@@ -3,3 +3,150 @@
 
   <head>
     <meta charset="utf-8">
+    <title> Breakfast cereal nutritions </title>
+    <script src="https://d3js.org/d3.v4.min.js"></script> <!--D3 library !-->
+    <script src="scripts/dataPreprocess.js"></script> <!-- script to preprocess/load data!-->
+    <script src="scripts/visualize.js"></script> <!-- script for visualization!-->
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+  </head>
+
+  <body>
+    <h1 align="center"> Breakfast cereal comparison </h1>
+    <h3> Assign attributes to following visual elements:</h3>
+    <div id="selectionMenu"> <!--making a selectipon menu!-->
+
+      <div id="selection1">
+        <label for="Mark"> Mark: </label>
+        <select id="Mark"><!-- a dropdown options to choose from!-->
+          <option value="mfr"> manufacturer </option>
+          <option value="type"> type(cold or Hot) </option>
+          <option value="calories"> calories </option>
+          <option value="protein"> protein </option>
+          <option value="fat"> fat </option>
+          <option value="sodium"> sodium </option>
+          <option value="fiber"> fiber </option>
+          <option value="carbo"> carbohydrates </option>
+          <option value="sugars"> sugars </option>
+          <option value="shelf"> shelf level </option>
+          <option value="potass"> potassium </option>
+          <option value="vitamins"> vitamins </option>
+          <option value="weight"> weight </option>
+          <option value="cups"> cups </option>
+        </select>
+      </div>
+
+      <div id="selection2">
+        <label for="X_axis"> X_axis: </label>
+        <select id="X_axis">
+            <option value="name"> name </option>
+            <option value="mfr"> manufacturer </option>
+            <option value="type"> type(cold or Hot) </option>
+            <option value="calories"> calories </option>
+            <option value="protein"> protein </option>
+            <option value="fat"> fat </option>
+            <option value="sodium"> sodium </option>
+            <option value="fiber"> fiber </option>
+            <option value="carbo"> carbohydrates </option>
+            <option value="sugars"> sugars </option>
+            <option value="shelf"> shelf level </option>
+            <option value="potass"> potassium </option>
+            <option value="vitamins"> vitamins </option>
+            <option value="weight"> weight </option>
+            <option value="cups"> cups </option>
+        </select>
+      </div>
+
+      <div id="selection3">
+        <label for="Y_axis"> Y_axis: </label>
+        <select id="Y_axis">
+            <option value="name"> name </option>
+            <option value="mfr"> manufacturer </option>
+            <option value="type"> type(cold or Hot) </option>
+            <option value="calories"> calories </option>
+            <option value="protein"> protein </option>
+            <option value="fat"> fat </option>
+            <option value="sodium"> sodium </option>
+            <option value="fiber"> fiber </option>
+            <option value="carbo"> carbohydrates </option>
+            <option value="sugars"> sugars </option>
+            <option value="shelf"> shelf level </option>
+            <option value="potass"> potassium </option>
+            <option value="vitamins"> vitamins </option>
+            <option value="weight"> weight </option>
+            <option value="cups"> cups </option>
+        </select>
+      </div>
+
+      <div id="selection4">
+        <label for="Brightness"> Brightness: </label>
+        <select id="Brightness">
+            <option value="mfr"> manufacturer </option>
+            <option value="type"> type(cold or Hot) </option>
+            <option value="calories"> calories </option>
+            <option value="protein"> protein </option>
+            <option value="fat"> fat </option>
+            <option value="sodium"> sodium </option>
+            <option value="fiber"> fiber </option>
+            <option value="carbo"> carbohydrates </option>
+            <option value="sugars"> sugars </option>
+            <option value="shelf"> shelf level </option>
+            <option value="potass"> potassium </option>
+            <option value="vitamins"> vitamins </option>
+            <option value="weight"> weight </option>
+            <option value="cups"> cups </option>
+        </select>
+      </div>
+
+      <div id="selection5">
+        <label for="Color"> Color: </label>
+        <select id="Color">
+            <option value="mfr"> manufacturer </option>
+            <option value="type"> type(cold or Hot) </option>
+            <option value="calories"> calories </option>
+            <option value="protein"> protein </option>
+            <option value="fat"> fat </option>
+            <option value="sodium"> sodium </option>
+            <option value="fiber"> fiber </option>
+            <option value="carbo"> carbohydrates </option>
+            <option value="sugars"> sugars </option>
+            <option value="shelf"> shelf level </option>
+            <option value="potass"> potassium </option>
+            <option value="vitamins"> vitamins </option>
+            <option value="weight"> weight </option>
+            <option value="cups"> cups </option>
+        </select>
+      </div>
+      
+      <div id="selectionButton"> 
+        <button type="button"w onclick="makeVisualization()"> Visualize!  </button> 
+      </div>
+    </div> <!--End of selection menu!-->
+    <script>
+
+      class cereal{//hold cereal and nutrition data
+        constructor(name, mfr, type, calories, protein, fat, sodium, fiber, carbo, sugars, shelf, potass, vitamins, weight, cups){
+          this.name = name;//name of the cereal
+          this.mfr = mfr;//manufacturer 
+          this.type = type;//type of cereal hot or cold
+          this.calories = calories;//number
+          this.protein = protein;//in gram
+          this.fat = fat;//in gram
+          this.sodium = sodium;//in mg
+          this.fiber = fiber;//in gram
+          this.carbo = carbo;//gram
+          this.sugars = sugars;//gram
+          this.shelf = shelf;//the shelf floor to keep the cereal 1,2, or 3
+          this.potass = potass;//potassium in mg
+          this.vitamins = vitamins;//discret 0 for none, 25 for enriched or 25%fda recommend, 100% of fda recommended
+          this.weight = weight;//weight in ounces
+          this.cups = cups;//cups for that weight
+        }
+      }
+      var cerealRecords = [];//array of cereal objects
+      loadData();//from dataPreprocess script
+
+      
+
+    </script>
+
+  </body>
