@@ -116,7 +116,7 @@
             <option value="cups"> cups </option>
         </select>
       </div>
-      
+
       <div id="selectionButton"> 
         <button type="button"w onclick="makeVisualization()"> Visualize!  </button> 
       </div>
@@ -142,6 +142,10 @@
           this.cups = cups;//cups for that weight
         }
       }
+      var margin = {top: 80, right: 220, bottom: 230, left: 60},// position variables for svg of scatterplot.
+          width = 1200 - margin.left - margin.right,
+          height = 800 - margin.top - margin.bottom;
+
       var cerealRecords = [];//array of cereal objects
       loadData();//from dataPreprocess script
 
