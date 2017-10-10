@@ -10,9 +10,16 @@ function makeVisualization(){//create  visualization
                     .options[document.getElementById("Brightness").selectedIndex].value;//Brighness
     var color_attr = document.getElementById("Color")
                     .options[document.getElementById("Color").selectedIndex].value;//Color
+    var xLabel = document.getElementById("X_axis")
+                .options[document.getElementById("X_axis").selectedIndex].text;//getting label for xAxis
+    var yLabel = document.getElementById("Y_axis")
+                .options[document.getElementById("Y_axis").selectedIndex].text;//getting label for yAxis
+    
+    var xScale = makeScale(x_attr,"x");//making x scale
+    var yScale = makeScale(y_attr,"y");//making y scale
+    var xAxis = d3.axisBottom(xScale);//X-axis
+    var yAxis = d3.axisLeft(yScale);//Y-axis
 
-    var xScale = makeScale(x_attr);
-    xScale.range([0,width]);//pixel range
     var svg = d3.select("body").append("svg")//as a canvas to make a graph on
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -20,45 +27,66 @@ function makeVisualization(){//create  visualization
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-    var xAxis = d3.axisBottom(xScale);//X-axis
+    
     svg.append("g")//attaching x axis
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
+    svg.append("text")//labbeling x axis
+        .attr("transform",
+              "translate(" + (width/2) + " ," +
+                             (height + margin.top+10) + ")")
+        .style("text-anchor", "middle")
+        .text(xLabel);
+
+    svg.append("g")//attaching y axis
+        .call(yAxis);
+    svg.append("text")//labelling y axis
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+          .style("text-anchor", "middle")
+          .text(yLabel);
 
 }
 
-function makeScale(x_attr){//function to make scale
+function makeScale(attr, type){//function to make scale
     var dstring = [];//domain for ordinal scale
-    if(x_attr == "name" || x_attr == "mfr" || x_attr == "type" || x_attr == "shelf"){//if attributes are ordinal
+    if(attr == "name" || attr == "mfr" || attr == "type" || attr == "shelf"){//if attributes are ordinal
         for(i=0; i<cerealRecords.length;i++){//checking all the records
             var flag = true;
             for(j=0;j<dstring.length;j++){
-                if(dstring[j] == cerealRecords[i][x_attr]){//if the records is previously noted for doain
+                if(dstring[j] == cerealRecords[i][attr]){//if the records is previously noted for doain
                     flag = false;
                     break;
                 }
                     
             }
             if(flag){//only when the domain value is unseen before
-                dstring.push(cerealRecords[i][x_attr]);//pushing values for domain
+                dstring.push(cerealRecords[i][attr]);//pushing values for domain
             }
             
         }
         dstring.sort();
-        var xScale = d3.scaleBand()
-                .domain(dstring)//domain data
-                .range([0,width]);//pixel range
-        return xScale;
+        var scale = d3.scaleBand()
+                .domain(dstring);//domain data
+        if(type == "x")//if we are making scale for xAxis
+                scale.range([0,width]);//pixel range
+        else if(type == "y")//for yAxis
+                scale.range([height,0]);
+        return scale;
     }
     else{//if attributes are nominal
-        var lowerBound = findMin(x_attr);
-        var upperBound = findMax(x_attr);
-        console.log(lowerBound);
-        console.log(upperBound);
-        var xScale = d3.scaleLinear()
-                    .domain([lowerBound, upperBound])//domain range
-                    .range([0,width]);//pixel range
-        return xScale;
+        var lowerBound = findMin(attr);
+        var upperBound = findMax(attr);
+    
+        var scale = d3.scaleLinear()
+                    .domain([lowerBound, upperBound]);//domain range
+        if(type == "x")//if we are making scale for xAxis
+                    scale.range([0,width]);//pixel range
+        else if(type == "y")//for yAxis
+                    scale.range([height,0]);
+        return scale;
     }
 }
 
