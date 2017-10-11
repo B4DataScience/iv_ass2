@@ -78,6 +78,26 @@
       </div>
 
       <div id="selection4">
+          <label for="Size"> Size: </label>
+          <select id="Size">
+              <option value="mfr"> manufacturer </option>
+              <option value="type"> type(cold or Hot) </option>
+              <option value="calories"> calories </option>
+              <option value="protein"> protein </option>
+              <option value="fat"> fat </option>
+              <option value="sodium"> sodium </option>
+              <option value="fiber"> fiber </option>
+              <option value="carbo"> carbohydrates </option>
+              <option value="sugars"> sugars </option>
+              <option value="shelf"> shelf level </option>
+              <option value="potass"> potassium </option>
+              <option value="vitamins"> vitamins </option>
+              <option value="weight"> weight </option>
+              <option value="cups"> cups </option>
+          </select>
+        </div>
+
+      <div id="selection5">
         <label for="Brightness"> Brightness: </label>
         <select id="Brightness">
             <option value="mfr"> manufacturer </option>
@@ -97,7 +117,7 @@
         </select>
       </div>
 
-      <div id="selection5">
+      <div id="selection6">
         <label for="Color"> Color: </label>
         <select id="Color">
             <option value="mfr"> manufacturer </option>
@@ -122,7 +142,7 @@
       </div>
     </div> <!--End of selection menu!-->
 
-    
+
     <script>
 
       class cereal{//hold cereal and nutrition data
@@ -144,7 +164,7 @@
           this.cups = cups;//cups for that weight
         }
       }
-      var margin = {top: 80, right: 220, bottom: 230, left: 60},// position variables for svg of scatterplot.
+      var margin = {top: 80, right: 220, bottom: 230, left: 160},// position variables for svg of scatterplot.
           width = 1200 - margin.left - margin.right,
           height = 800 - margin.top - margin.bottom;
 
