@@ -25,12 +25,12 @@
     float: left;
 }
 #selection5{
-    width:220px;
+    width:180px;
     height: 30px;
     float: left;
 }
 #selection6{
-    width:180px;
+    width:220px;
     height: 30px;
     float: left;
 }
@@ -39,4 +39,16 @@
     height: 50px;
     float: left;
 }
+
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    width: auto;
+    height: auto;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: rgb(138, 190, 224);
+    border: 0px;
+    border-radius: 8px;
+  }
 
