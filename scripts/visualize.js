@@ -104,7 +104,7 @@ function makeVisualization() {//create  visualization
         .attr("class", "tooltip")
         .style("opacity", 0);
     var markDomain = makeOrdinalValueList(mark_attr);
-
+    
 
 
     cerealRecords.forEach(function (d) {//for each record
@@ -156,12 +156,7 @@ function makeVisualization() {//create  visualization
     }
     else {
         for (i = 0; i < markDomain.length - 1; i++) {
-            if (i == markDomain.length - 1) {
-                var s = "[" + markDomain[i] + "," + markDomain[i + 1] + "]";
-            }
-            else {
-                var s = "[" + markDomain[i] + "," + markDomain[i + 1] + ")";
-            }
+            var s = ""+ markDomain[i] + "-" + markDomain[i + 1] + "";
             markLegendList.push(new markLegend(d3.symbols[i], s));
         }
     }
@@ -175,10 +170,10 @@ function makeVisualization() {//create  visualization
         .attr("d", d3.symbol().type(function (d) {
             return d.symbol;
         }))
-        .attr("transform", "translate(" + (width - 80) + ",0)");
+        .attr("transform", "translate(" + (width - 40) + ",0)");
 
     legend.append("text")
-        .attr("x", width + 30)
+        .attr("x", width -20)
         .attr("y", 0)
         .attr("dy", ".25em")
         .style("text-anchor", "start")
@@ -282,7 +277,7 @@ function makeSizeScale(attr) {
     if (attr == "name" || attr == "mfr" || attr == "type" || attr == "shelf" || attr == "vitamins") {
         var sizeScale = d3.scaleBand()
             .domain(makeOrdinalValueList(attr))
-            .range([40, 240]);
+            .range([40, 400]);
     }
     else {
         var sizeScale = d3.scaleLinear()//to size the nominal attribute 
@@ -371,6 +366,7 @@ function findMax(attr) {//to find minimum value in given attribute
 }
 function makeOrdinalValueList(attr) {//to make a list of ordinal attribute domain//if data is continuous this will bin it
     var dstring = [];//domain for ordinal scale
+    
     if (attr == "name" || attr == "mfr" || attr == "type" || attr == "shelf" || attr == "vitamins") {//if attributes are ordinal
         for (i = 0; i < cerealRecords.length; i++) {//checking all the records
             var flag = true;
@@ -385,6 +381,10 @@ function makeOrdinalValueList(attr) {//to make a list of ordinal attribute domai
                 dstring.push(cerealRecords[i][attr]);//pushing values for domain
             }
 
+        }
+        if(attr == "vitamins"){
+            dstring = sortMe(dstring);
+            return dstring;
         }
         dstring.sort();
         return dstring;
